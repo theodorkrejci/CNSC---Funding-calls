@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Výzvy pro členy — Czech National Semiconductor Cluster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#F0F2EF;
+  --paper-raised:#FAFBF9;
+  --ink:#15191A;
+  --ink-soft:#4A5250;
+  --line:#D3D8D2;
+  --line-strong:#B7BEB7;
+
+  --eu:#25417C;
+  --eu-tint:#E3E8F1;
+  --cz:#9C5A26;
+  --cz-tint:#F1E7DA;
+  --bi:#2E6E63;
+  --bi-tint:#DFEBE7;
+  --int:#8A6522;
+  --int-tint:#EFE6D2;
+
+  --open:#2F7D4F;
+  --prep:#B4791B;
+  --recur:#5B6470;
+
+  --radius:3px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans', system-ui, sans-serif;
+  font-size:15.5px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:600;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+a{color:inherit;}
+.mono{font-family:'IBM Plex Mono', monospace;}
+
+/* ---------- layout shell ---------- */
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+/* ---------- top navbar (matches Katalog) ---------- */
+header.topnav{
+  background:var(--paper-raised);
+  border-bottom:1px solid var(--line-strong);
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+.topnav-inner{
+  max-width:1040px;
+  margin:0 auto;
+  padding:12px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.topnav-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--ink);
+  min-width:0;
+}
+.topnav-brand img{
+  height:32px;
+  width:auto;
+  display:block;
+  flex-shrink:0;
+}
+.topnav-brand span{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:600;
+  font-size:14.5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.topnav-links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.topnav-links a{
+  font-size:13.5px;
+  color:var(--ink-soft);
+  text-decoration:none;
+  white-space:nowrap;
+}
+.topnav-links a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:3px;}
+.topnav-links a.current{color:var(--ink);font-weight:600;}
+@media(max-width:640px){
+  .topnav-inner{flex-wrap:wrap;gap:10px;}
+  .topnav-links{gap:14px;}
+}
+
+/* ---------- header ---------- */
+header.top{
+  border-bottom:1px solid var(--line-strong);
+  background:var(--paper-raised);
+}
+.top-inner{
+  padding:36px 24px 0;
+  max-width:920px;
+  margin:0 auto;
+}
+.eyebrow-row{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.cluster-name{
+  font-size:13px;
+  color:var(--ink-soft);
+  letter-spacing:0.02em;
+}
+.cluster-name strong{color:var(--ink);font-weight:600;}
+h1.title{
+  font-size:clamp(28px,4.2vw,40px);
+  margin-top:10px;
+  max-width:14ch;
+}
+.lede{
+  margin-top:14px;
+  max-width:62ch;
+  color:var(--ink-soft);
+  font-size:16px;
+}
+.lede a{text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:2px;}
+
+/* stat readout */
+.readout{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+.readout div{
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:14px 16px 16px;
+}
+.readout .num{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:26px;
+  font-weight:600;
+  line-height:1;
+}
+.readout .lbl{
+  margin-top:6px;
+  font-size:12.5px;
+  color:var(--ink-soft);
+}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:var(--paper);
+  border-bottom:1px solid var(--line-strong);
+  padding:14px 0;
+}
+.controls-inner{
+  max-width:920px;
+  margin:0 auto;
+  padding:0 24px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.seg{
+  display:flex;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.seg button{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:13.5px;
+  font-weight:500;
+  padding:8px 13px;
+  border:none;
+  background:var(--paper-raised);
+  color:var(--ink-soft);
+  cursor:pointer;
+  border-right:1px solid var(--line-strong);
+}
+.seg button:last-child{border-right:none;}
+.seg button.active{background:var(--ink);color:var(--paper-raised);}
+.seg button[data-cat="eu"].active{background:var(--eu);}
+.seg button[data-cat="cz"].active{background:var(--cz);}
+.seg button[data-cat="bi"].active{background:var(--bi);}
+.seg button[data-cat="int"].active{background:var(--int);}
+
+.search{
+  flex:1 1 180px;
+  min-width:150px;
+}
+.search input{
+  width:100%;
+  padding:8px 12px;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  background:var(--paper-raised);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:13.5px;
+  color:var(--ink);
+}
+.search input:focus{outline:2px solid var(--eu);outline-offset:1px;}
+
+.chk{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+
+.tagbar{
+  max-width:920px;
+  margin:12px auto 0;
+  padding:0 24px 2px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.tag{
+  font-size:12px;
+  font-family:'IBM Plex Mono',monospace;
+  padding:4px 9px;
+  border:1px solid var(--line-strong);
+  border-radius:20px;
+  background:var(--paper-raised);
+  color:var(--ink-soft);
+  cursor:pointer;
+}
+.tag.active{background:var(--ink);color:var(--paper-raised);border-color:var(--ink);}
+.filter-group{
+  max-width:920px;
+  margin:10px auto 0;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+.filter-label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+
+.legend-note{
+  max-width:920px;
+  margin:12px auto 0;
+  padding:10px 24px 0;
+  font-size:12px;
+  line-height:1.6;
+  color:var(--ink-soft);
+  border-top:1px solid var(--line);
+}
+.legend-note strong{color:var(--ink);font-weight:600;margin-right:2px;}
+.legend-note strong:not(:first-child){margin-left:14px;}
+
+/* ---------- sections ---------- */
+main{padding:32px 0 8px;}
+.section{margin-bottom:6px;}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  padding:22px 0 10px;
+  border-top:2px solid var(--ink);
+}
+.section:first-child .section-head{border-top:2px solid var(--ink);}
+.section-head h2{font-size:19px;}
+.section-head .count{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--ink-soft);
+}
+.section[data-cat="eu"] .section-head{border-top-color:var(--eu);}
+.section[data-cat="cz"] .section-head{border-top-color:var(--cz);}
+.section[data-cat="bi"] .section-head{border-top-color:var(--bi);}
+.section[data-cat="int"] .section-head{border-top-color:var(--int);}
+.section-note{
+  font-size:13.5px;
+  color:var(--ink-soft);
+  margin:-2px 0 14px;
+  max-width:66ch;
+}
+
+/* ---------- call row ---------- */
+details.call{
+  border:1px solid var(--line);
+  border-left:3px solid var(--line-strong);
+  background:var(--paper-raised);
+  margin-bottom:8px;
+  border-radius:var(--radius);
+}
+.section[data-cat="eu"] details.call{border-left-color:var(--eu);}
+.section[data-cat="cz"] details.call{border-left-color:var(--cz);}
+.section[data-cat="bi"] details.call{border-left-color:var(--bi);}
+.section[data-cat="int"] details.call{border-left-color:var(--int);}
+details.call[open]{border-color:var(--line-strong);}
+
+summary.row{
+  list-style:none;
+  cursor:pointer;
+  padding:14px 16px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,15rem);
+  gap:14px 18px;
+  align-items:start;
+}
+summary.row::-webkit-details-marker{display:none;}
+summary.row::marker{content:"";}
+
+.row-main{min-width:0;overflow-wrap:anywhere;}
+.row-code{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  min-width:0;
+  overflow-wrap:anywhere;
+  color:var(--ink-soft);
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:4px;
+}
+.pill{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  padding:2px 7px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+.pill.open{background:#E3F0E6;color:var(--open);}
+.pill.prep{background:#FBEDD8;color:var(--prep);}
+.pill.recur{background:#E7E9EC;color:var(--recur);}
+.row-title{
+  font-size:16px;
+  font-weight:600;
+  font-family:'Space Grotesk',sans-serif;
+  line-height:1.3;
+}
+.row-sub{
+  margin-top:3px;
+  font-size:13px;
+  color:var(--ink-soft);
+}
+
+.row-meta{
+  text-align:right;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.deadline-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:22px;
+  font-weight:600;
+  line-height:1;
+}
+.deadline-num.past{color:var(--ink-soft);}
+.deadline-lbl{
+  font-size:11px;
+  color:var(--ink-soft);
+  margin-top:3px;
+}
+.budget-lbl{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  line-height:1.4;
+  color:var(--ink-soft);
+  margin-top:6px;
+}
+
+.row-details{
+  padding:0 16px 18px 16px;
+  border-top:1px solid var(--line);
+  margin-top:0;
+}
+.row-details-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px 24px;
+  padding-top:14px;
+}
+@media(max-width:640px){
+  .row-details-grid{grid-template-columns:1fr;}
+  summary.row{grid-template-columns:1fr;}
+  .row-meta{text-align:left;margin-top:4px;}
+}
+.detail-block h4{
+  font-size:11.5px;
+  text-transform:none;
+  color:var(--ink-soft);
+  font-weight:600;
+  margin-bottom:5px;
+  font-family:'IBM Plex Sans',sans-serif;
+}
+.detail-block p{margin:0;font-size:13.5px;color:var(--ink);}
+.detail-tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;}
+.detail-tags span{
+  font-size:11px;
+  font-family:'IBM Plex Mono',monospace;
+  padding:3px 8px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:20px;
+  color:var(--ink-soft);
+}
+.row-links{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;}
+.row-links a{
+  font-size:13px;
+  font-weight:500;
+  padding:7px 12px;
+  border:1px solid var(--ink);
+  border-radius:var(--radius);
+  text-decoration:none;
+  color:var(--ink);
+}
+.row-links a:hover{background:var(--ink);color:var(--paper-raised);}
+.row-links a.secondary{border-color:var(--line-strong);color:var(--ink-soft);}
+.row-links a.secondary:hover{background:var(--ink);color:var(--paper-raised);border-color:var(--ink);}
+.section-watch{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  margin:-6px 0 14px;
+  max-width:70ch;
+}
+
+.empty-state{
+  padding:40px 16px;
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:14px;
+  border:1px dashed var(--line-strong);
+  border-radius:var(--radius);
+}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:2px solid var(--ink);
+  margin-top:40px;
+  padding:28px 0 50px;
+  color:var(--ink-soft);
+  font-size:13px;
+}
+footer h3{font-size:14px;color:var(--ink);margin-bottom:10px;}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:32px;
+}
+@media(max-width:640px){.footer-grid{grid-template-columns:1fr;}}
+.footer-grid ul{margin:0;padding:0;list-style:none;}
+.footer-grid li{margin-bottom:7px;}
+.footer-grid a{text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:2px;}
+.disclaimer{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  max-width:70ch;
+}
+.footer-address{
+  margin-top:26px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  font-size:12.5px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+.footer-address strong{color:var(--ink);}
+.footer-address a{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:2px;}
+.partner-strip{
+  margin-top:14px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  color:var(--ink-soft);
+}
+</style>
+<!--
+  =====================================================================
+  DATA VÝZEV — jak přidat nebo upravit výzvu (i bez programování)
+  =====================================================================
+  Níže je blok JSON s daty všech výzev (má id "calls-data"). Otevřete
+  tento soubor přímo v GitHubu (tlačítko tužky = "Edit this file") a
+  upravte JEN tento blok — od hranaté závorky [ hned pod ním až po
+  poslední ] před koncovou značkou bloku.
+
+  Každá výzva je jeden objekt {...} v seznamu, oddělený čárkou. Povinná pole:
+    cat        - "eu" | "cz" | "bi" | "int"  (do které sekce patří)
+    code       - kód/název poskytovatele výzvy (zobrazí se malým písmem nahoře)
+    status     - "open" (otevřená) | "prep" (připravovaná) | "recur" (opakovaná)
+    title      - hlavní název výzvy
+    sub        - podtitulek (poskytovatel, typ nástroje)
+    deadline   - datum uzávěrky ve formátu "YYYY-MM-DD", nebo "" pokud není známo
+    budget     - text o rozpočtu
+    rate       - text o míře podpory
+    applicants - kdo může žádat
+    scope      - čeho se výzva týká (2-4 věty)
+    outcomes   - očekávané výstupy
+    tags       - seznam krátkých štítků, např. ["Fotonika","Výroba"]
+    note       - (nepovinné) poznámka pro členy CNSC, proč je to relevantní
+    link       - URL na oficiální zdroj / podání žádosti
+
+  Chcete-li přidat novou výzvu: zkopírujte jeden celý blok {...},
+  vložte čárku za předchozí blok a upravte hodnoty. Chcete-li výzvu
+  odebrat, smažte celý její blok {...} včetně čárky za ním.
+
+  Po uložení změny (commit) v GitHubu se stránka na GitHub Pages
+  aktualizuje automaticky do cca 1-2 minut, bez jakéhokoli dalšího kroku.
+  =====================================================================
+-->
+<script id="calls-data" type="application/json">
+[
+  {
+    "cat": "eu",
+    "code": "DIGITAL-JU-CHIPS-2026-AI1-SG",
+    "status": "open",
+    "title": "AI čipové demonstrátory pro evropskou výpočetní infrastrukturu (Stream A)",
+    "sub": "Chips JU · Chips for Europe · Simple Grant",
+    "deadline": "2026-10-27",
+    "budget": "10 M€ celkem · 1 M€/projekt",
+    "rate": "Podnik 50 % · SME 50 % · univerzita/NFP 50 %",
+    "applicants": "Konzorcia musí zahrnovat evropskou fabless firmu odpovědnou za návrh AI čipu; čip musí být již odeslán do výroby.",
+    "scope": "Podpora funkčních demonstrátorů AI čipů na úrovni desky plošných spojů, vyvinutých evropskými návrháři čipů, s cílem otestovat je na společné evropské hodnoticí platformě (Stream B).",
+    "outcomes": "Užší výběr evropských AI čipových řešení oceněných značkou AI Compute Excellence Label pro postup do vývoje výpočetních racků.",
+    "tags": [
+      "AI/Compute",
+      "IP a design"
+    ],
+    "audience": [
+      "sme",
+      "large",
+      "research"
+    ],
+    "link": "https://www.chips-ju.europa.eu/Call-Details/?id=97c5feaf-d070-f111-ab0e-000d3ab6c0a4",
+    "link2": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-JU-CHIPS-2026-AI1-SG",
+    "note": "Call text zmiňuje, že vybraná řešení mohou později postoupit do navazující fáze vývoje racků (interně označované jako Topic A2) — ta ale k 28. 9. 2026 není na chips-ju.europa.eu vedená jako samostatná vyhlášená ani plánovaná výzva, takže ji na stránce neuvádíme zvlášť."
+  },
+  {
+    "cat": "eu",
+    "code": "DIGITAL-JU-CHIPS-2026-AI-GfP",
+    "status": "open",
+    "title": "Hodnoticí a nasazovací platforma pro AI compute (Stream B)",
+    "sub": "Chips JU · Chips for Europe · Grant for Procurement",
+    "deadline": "2026-10-27",
+    "budget": "70 M€ celkem · 70 M€/projekt",
+    "rate": "Podnik 50 % · SME 50 % · univerzita/NFP 50 %",
+    "applicants": "Konzorcium kupujících (max. 10 účastníků) včetně provozovatele AI Factory nebo srovnatelné veřejné AI/HPC infrastruktury a evropských cloudových poskytovatelů.",
+    "scope": "Vytvoření a provoz společné evropské platformy pro ověření AI čipů a racků ze Streamu A vůči reálným zátěžím a benchmarkům, následované obstaráním a nasazením pilotních racků.",
+    "outcomes": "Auditovatelné benchmarkové zprávy, výběr dodavatelů a první pilotní nasazení evropských AI compute systémů.",
+    "tags": [
+      "AI/Compute"
+    ],
+    "audience": [
+      "sme",
+      "large",
+      "research"
+    ],
+    "note": "Většina rozpočtu jde do obstarávání a nasazení; relevantní hlavně pro subjekty schopné dodat AI čip nebo rack do provozu.",
+    "link": "https://www.chips-ju.europa.eu/Call-Details/?id=99c5feaf-d070-f111-ab0e-000d3ab6c0a4",
+    "link2": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-JU-CHIPS-2026-AI-GfP"
+  },
+  {
+    "cat": "eu",
+    "code": "DIGITAL-JU-Chips-2026-SG-JAPAN",
+    "status": "open",
+    "title": "Mezinárodní spolupráce EU–Japonsko v polovodičích",
+    "sub": "Chips JU · Chips for Europe · Simple Grant",
+    "deadline": "2026-12-08",
+    "budget": "5 M€ celkem · 3–5 M€/projekt",
+    "rate": "Podnik 50 % · SME 50 % · univerzita/NFP 50 %",
+    "applicants": "Konzorcia s japonskými partnery, propojující materiálové vědce, výrobce a experty na AI.",
+    "scope": "Společný výzkum chipletového ekosystému pro AI a pokročilých procesních technologií pro uzly pod 2 nm ve spolupráci s japonskými konsorcii.",
+    "outcomes": "Pokročilá heterogenní integrace pro AI aplikace a příspěvek ke globálním standardům chipletových rozhraní.",
+    "tags": [
+      "IP a design",
+      "Balení a testování"
+    ],
+    "audience": [
+      "sme",
+      "large",
+      "research"
+    ],
+    "link": "https://www.chips-ju.europa.eu/Call-Details/?id=a1c5feaf-d070-f111-ab0e-000d3ab6c0a4",
+    "link2": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/DIGITAL-JU-Chips-2026-SG-JAPAN"
+  },
+  {
+    "cat": "eu",
+    "code": "HORIZON-JU-CHIPS-2026-IMAF-CSA",
+    "status": "open",
+    "title": "Rámec pro monitorování a hodnocení dopadu Chips JU",
+    "sub": "Chips JU · ECS · Coordination and Support Action",
+    "deadline": "2026-09-30",
+    "budget": "1 M€ celkem",
+    "rate": "100 % pro všechny typy účastníků",
+    "applicants": "Organizace se zkušeností s evaluací výzkumných programů a budováním datových platforem; spíš konzultační a evaluační týmy než technologické firmy.",
+    "scope": "Návrh a pilotní ověření rámce indikátorů, dat a metodik pro krátko-, středně- a dlouhodobé hodnocení dopadů programů Chips JU.",
+    "outcomes": "Validovaný systém indikátorů, digitální platforma pro sběr dat a metodika hodnocení dopadu.",
+    "tags": [
+      "Dodavatelský řetězec"
+    ],
+    "audience": [
+      "sme",
+      "large",
+      "research"
+    ],
+    "note": "Nízká přímá relevance pro technologické členy CNSC; uzávěrka je za dva dny.",
+    "link": "https://www.chips-ju.europa.eu/Call-Details/?id=a3c5feaf-d070-f111-ab0e-000d3ab6c0a4",
+    "link2": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-JU-CHIPS-2026-IMAF-CSA"
+  },
+  {
+    "cat": "eu",
+    "code": "HORIZON-EIC-2026 — EIC Accelerator Open",
+    "status": "open",
+    "title": "EIC Accelerator Open — grant a kapitálová investice pro deep-tech startupy a MSP",
+    "sub": "Evropská rada pro inovace (EIC) · Horizon Europe · poslední cut-off pro plné návrhy v roce 2026: 4. 11.",
+    "deadline": "2026-11-04",
+    "budget": "Grant do 2,5 M€ + kapitálová investice EIC Fund 0,5–10 M€ na projekt",
+    "rate": "Kombinace grantu a kapitálové investice; celkový roční rozpočet programu se mezi zdroji liší (řádově stovky M€) — přesné číslo ověřte na eic.ec.europa.eu",
+    "applicants": "Startupy a MSP z členských států EU a přidružených zemí; krátký návrh lze podat kdykoli, plný návrh (po úspěšném krátkém) jen k některému z šesti cut-off termínů v roce 2026.",
+    "scope": "Otevřená výzva bez tematického omezení pro průlomové technologie (TRL 5 až 8), včetně polovodičů, fotoniky, senzorů a deep-tech hardwaru, s cílem škálovat firmu na mezinárodní úrovni.",
+    "outcomes": "Financování škálování inovace kombinací grantu a kapitálového vstupu plus služby EIC Business Acceleration.",
+    "tags": [],
+    "audience": [
+      "sme",
+      "startup"
+    ],
+    "note": "V roce 2026 přešel EIC Accelerator ze dvou na šest cut-off termínů ročně (7. 1., 4. 3., 6. 5., 8. 7., 2. 9., 4. 11.) — poslední z nich je 4. 11. 2026. České firmy s oceněním Seal of Excellence mívají navazující národní výzvu TA ČR.",
+    "link": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator/eic-accelerator-open_en"
+  },
+  {
+    "cat": "cz",
+    "code": "OP TAK — STEP Investice",
+    "status": "open",
+    "title": "STEP – Investice: vývoj a výroba kritických technologií",
+    "sub": "MPO / Agentura pro podnikání a inovace (API) · kolová investiční výzva · podání přes ISKP21+",
+    "deadline": "2026-10-15",
+    "budget": "986 mil. Kč zbývá v segmentu pro přechodové regiony (z 1,85 mld. Kč celkem) · 5–250 mil. Kč/projekt",
+    "rate": "20–75 % dle regionu a velikosti podniku",
+    "applicants": "Malé, střední i velké podniky s českým IČ; místo realizace v přechodových regionech (Středočeský, Plzeňský, Jihočeský, Jihomoravský kraj a Vysočina) — segment pro méně rozvinuté regiony (Ústecký, Karlovarský, Liberecký, Moravskoslezský, Královéhradecký aj.) byl vyčerpán a příjem žádostí tam skončil.",
+    "scope": "Investice do dlouhodobého hmotného a nehmotného majetku pro vývoj a výrobu kritických technologií evropského významu, mj. polovodičů, AI, kvantových technologií a pokročilé konektivity; projekt musí přispět ke snížení strategické závislosti EU nebo přinášet špičkovou inovaci.",
+    "outcomes": "Stroje, technologie a výrobní linky pro náběh výroby kritických technologií; nejzazší ukončení projektu 30. 6. 2029.",
+    "tags": [
+      "Výroba"
+    ],
+    "audience": [
+      "sme",
+      "large"
+    ],
+    "note": "Segment pro méně rozvinuté regiony byl k 1. 8. 2026 předčasně uzavřen po naplnění 300 % alokace (ověřeno na apiagentura.gov.cz) — pro Brno a Jihomoravský kraj to nevadí, ten spadá do stále otevřeného segmentu pro přechodové regiony. Kolová výzva, alokace se může vyčerpat i zde dřív než 15. 10. 2026.",
+    "link": "https://apiagentura.gov.cz/podporovane-aktivity-optak/step-investice-vyvoj-a-vyroba-kritickych-technologii/step-investice-vyvoj-a-vyroba-kritickych-technologii/"
+  },
+  {
+    "cat": "cz",
+    "code": "OP TAK — IPCEI ME/CT (STEP)",
+    "status": "open",
+    "title": "IPCEI mikroelektronika a komunikační technologie — navazující fáze projektů",
+    "sub": "MPO · nová aktivita STEP v OP TAK · podání přes ISKP21+",
+    "deadline": "2026-11-16",
+    "budget": "300 mil. Kč celkem",
+    "rate": "Dle podmínek notifikace IPCEI ME/CT (SA.101141)",
+    "applicants": "Pouze podnikatelské subjekty, které jsou jako žadatelé součástí IPCEI ME/CT; projekty musí prokázat úspěšné splnění cílů první fáze (VaV), financované z Národního plánu obnovy.",
+    "scope": "Navazující fáze téhož IPCEI ME/CT schváleného Evropskou komisí v červnu 2023 (ne nová iniciativa a ne IPCEI AST); podporuje strategické projekty např. v návrhu čipů pro AI, 5G/6G konektivitě, pokročilém pouzdření a substrátech pro RF a výkonové součástky.",
+    "outcomes": "Dokončení a průmyslové nasazení výsledků projektů, které už mají schválenou EU notifikaci.",
+    "tags": [
+      "Výroba"
+    ],
+    "audience": [
+      "sme",
+      "large"
+    ],
+    "note": "Relevantní jen pro členy, kteří jsou už součástí schváleného konsorcia IPCEI ME/CT. Termín 16. 11. 2026 (do 9:59:59).",
+    "link": "https://apiagentura.gov.cz/podporovane-aktivity-optak/step/ipcei-mikroelektronika-a-komunikacni-technologie/"
+  },
+  {
+    "cat": "cz",
+    "code": "TA ČR / MPO — TREND, podprogram 2 (Nováčci)",
+    "status": "prep",
+    "title": "TREND, podprogram 2 — Nováčci",
+    "sub": "TA ČR + MPO · veřejná soutěž zatím nevyhlášena",
+    "deadline": "",
+    "budget": "Zatím neupřesněno",
+    "rate": "Zatím neupřesněno",
+    "applicants": "Podniky, které v posledních 5 letech nečerpaly podporu na VaV nad 1 mil. Kč (podmínka bude upřesněna v zadávací dokumentaci).",
+    "scope": "Nastartování vlastních výzkumných a vývojových aktivit u podniků bez zkušenosti s VaV, v rámci strategických technologií RIS3 (mj. AI, kvantové technologie, polovodiče).",
+    "outcomes": "Zatím neupřesněno.",
+    "tags": [
+      "IP a design",
+      "Výroba"
+    ],
+    "audience": [
+      "sme"
+    ],
+    "note": "Vyhlášení bylo v únoru 2026 znovu odloženo kvůli rozpočtovému provizoriu; nový termín zatím TA ČR neoznámila.",
+    "link": "https://tacr.gov.cz/program/program-trend/"
+  },
+  {
+    "cat": "bi",
+    "code": "Eureka Cluster Xecs — Call 6",
+    "status": "open",
+    "title": "Xecs Call 6 — mezinárodní R&D projekty v elektronických komponentech a systémech (ECS)",
+    "sub": "Eureka Cluster Xecs (AENEAS) · dvoufázová výzva, národní financování účastníků",
+    "deadline": "2027-01-21",
+    "budget": "Dle národních programů jednotlivých zemí",
+    "rate": "Dle národních pravidel financování",
+    "applicants": "Mezinárodní konsorcia firem, MSP, výzkumných organizací a univerzit ze zemí Eureka; uzávěrka se týká Project Outline, plný návrh následuje 15. 4. 2027.",
+    "scope": "Průmyslově vedené projekty pokrývající celý hodnotový řetězec ECS podle SRIA 2026, menší a cílenější než výzvy Chips JU; vhodné pro projekty s partnery z více zemí, které financují jejich domácí agentury.",
+    "outcomes": "Mezinárodní R&D projekty s vysokým průmyslovým dopadem, výhradně pro civilní účely.",
+    "tags": [
+      "IP a design",
+      "Výroba",
+      "Balení a testování"
+    ],
+    "audience": [
+      "sme",
+      "large",
+      "research"
+    ],
+    "note": "Matchmaking akce ve Vídni 6.–7. 10. 2026 je vhodná příležitost k nalezení partnerů. Českou účast a financování ověřte před podáním u národního koordinátora Eureka.",
+    "link": "https://www.eurekanetwork.org/programmes-and-calls/eureka-clusters/xecs-call-6-2026/"
+  },
+  {
+    "cat": "bi",
+    "code": "TA ČR SIGMA DC4 — další kolo (Tchaj-wan, Korea, Sasko)",
+    "status": "prep",
+    "title": "SIGMA DC4 — další kolo bilaterální spolupráce",
+    "sub": "TA ČR · další veřejná soutěž zatím nevyhlášena",
+    "deadline": "",
+    "budget": "Zatím neupřesněno",
+    "rate": "Zatím neupřesněno",
+    "applicants": "Český hlavní uchazeč s partnerem u zahraniční agentury (v 16. kole šlo o MoEA/ITRI a NSTC pro Tchaj-wan, KIAT/KETEP pro Koreu, SMWA pro Sasko).",
+    "scope": "Navazuje na 16. veřejnou soutěž SIGMA DC4 (uzavřenou 24. 6. 2026, nyní ve vyhodnocení); přesný seznam zemí a témata TA ČR oznámí až s vyhlášením dalšího kola.",
+    "outcomes": "Zatím neupřesněno.",
+    "tags": [],
+    "audience": [
+      "sme",
+      "large",
+      "research"
+    ],
+    "note": "TA ČR obvykle zveřejní předběžné parametry několik týdnů před vyhlášením — sledujte web TA ČR.",
+    "link": "https://tacr.gov.cz/program/program-sigma/"
+  },
+  {
+    "cat": "int",
+    "code": "MOEA / InvesTaiwan — A+ Industrial Innovation R&D",
+    "status": "open",
+    "title": "Dotace na R&D centrum zahraniční firmy na Tchaj-wanu",
+    "sub": "Ministry of Economic Affairs (Tchaj-wan) · průběžné podávání, žádá se přímo u tchajwanské strany",
+    "deadline": "",
+    "budget": "Až 50 % celkových R&D výdajů schváleného projektu",
+    "rate": "Do 50 % dle rozhodnutí MOEA v jednotlivém případě",
+    "applicants": "Zahraniční firmy (včetně českých) zakládající nebo rozšiřující výzkumně-vývojové centrum na Tchaj-wanu ve spolupráci s místním průmyslem.",
+    "scope": "Global Innovation Partnership Initiative v rámci A+ Industrial Innovation R&D Program cílí přímo na zahraniční firmy s technologií komplementární k tchajwanskému průmyslu; mikroelektronika a polovodiče patří mezi hlavní cílové oblasti. Žádost se podává průběžně, bez jednorázové uzávěrky.",
+    "outcomes": "Schválené firmy získají dotaci až do výše 50 % R&D výdajů a založí R&D centrum na Tchaj-wanu.",
+    "tags": [
+      "Výroba"
+    ],
+    "audience": [
+      "sme",
+      "large"
+    ],
+    "note": "Ověřeno k 28. 9. 2026 přímo na investtaiwan.nat.gov.tw — program běží průběžně, vhodné spíš pro trvalejší přítomnost než jednorázový projekt.",
+    "link": "https://investtaiwan.nat.gov.tw/showPageeng10310011?lang=eng&search=10310011"
+  },
+  {
+    "cat": "int",
+    "code": "Korea — K-Chips Act (daňový kredit)",
+    "status": "open",
+    "title": "Daňový kredit na investice do polovodičové výroby v Koreji",
+    "sub": "Korejská vláda · stálý daňový nástroj, uplatňuje se přes korejskou dceřinou společnost",
+    "deadline": "",
+    "budget": "Bez rozpočtového stropu (daňový kredit, ne grant)",
+    "rate": "15 % velké podniky · 25 % MSP, z investic do národních strategických technologií",
+    "applicants": "Firmy investující do výroby polovodičů (a dalších strategických technologií) v Koreji prostřednictvím korejské dceřiné společnosti nebo poboček.",
+    "scope": "K-Chips Act zvýhodňuje investice do výrobních zařízení pro polovodiče a další národní strategické technologie odpočtem z daně z příjmu; od roku 2026 se navíc připravuje samostatný kredit vázaný na objem domácí výroby.",
+    "outcomes": "Snížení daňové zátěže při investici do korejské polovodičové výroby.",
+    "tags": [
+      "Výroba"
+    ],
+    "audience": [
+      "sme",
+      "large"
+    ],
+    "note": "Jde o daňový nástroj, ne grantovou výzvu — uplatňuje se až při zdanění korejské dceřiné společnosti, ne přímou žádostí. Ověřeno k 28. 9. 2026, nástroj je legislativně stálý a průběžně novelizovaný.",
+    "link": "https://www.investkorea.org/ik-en/cntnts/i-5006/web.do"
+  },
+  {
+    "cat": "int",
+    "code": "NSTC / Taiwan CbI — IC Taiwan Grand Challenge, další kolo",
+    "status": "prep",
+    "title": "IC Taiwan Grand Challenge — další kolo (po Batch 4)",
+    "sub": "Taiwan Chip-based Industrial Innovation Program · další kolo zatím neohlášeno",
+    "deadline": "",
+    "budget": "30 000 USD pro vítězné týmy + přístup k výrobě a EDA nástrojům",
+    "rate": "Bez spoluúčasti — podpora jde přímo od tchajwanského organizátora",
+    "applicants": "Startupy (do 8 let od založení), výzkumné týmy, právnické osoby i jednotlivci odkudkoli na světě.",
+    "scope": "4. kolo (Batch 4) přijímalo přihlášky do 28. 2. 2026; organizátor (NSTC/TCA) obvykle vyhlašuje další kolo s odstupem několika měsíců.",
+    "outcomes": "Vítězné týmy získávají peněžní odměnu, mentoring od tchajwanských firem (TSMC, MediaTek, UMC) a prezentaci na COMPUTEX/InnoVEX.",
+    "tags": [
+      "AI/Compute",
+      "IP a design"
+    ],
+    "audience": [
+      "sme",
+      "startup"
+    ],
+    "note": "Sledujte ictaiwanchallenge.org pro vyhlášení dalšího kola.",
+    "link": "https://ictaiwanchallenge.org/"
+  }
+]
+</script>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-brand" href="#top">
+      <img src="https://www.semicz.cz/wp-content/uploads/2024/12/Cropped_Czech-National-Main-Logo-800x600-1.png" alt="Czech National Semiconductor Cluster">
+      <span>Czech National Semiconductor Cluster</span>
+    </a>
+    <nav class="topnav-links">
+      <a href="https://smarterinstruments.github.io/Katalog/" target="_blank" rel="noopener">Katalog členů</a>
+      <a href="#sections" class="current">Výzvy</a>
+      <a href="https://www.semicz.cz" target="_blank" rel="noopener">O klastru</a>
+      <a href="mailto:info@semicz.cz">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<header class="top" id="top">
+  <div class="top-inner">
+    <div class="eyebrow-row">
+      <div class="cluster-name">Výzvy pro členy · Polovodičový hodnotový řetězec ČR</div>
+      <div class="cluster-name" id="updated-lbl">aktualizováno k 28. 9. 2026</div>
+    </div>
+    <h1 class="title">Od nápadu<br>k financování.</h1>
+    <p class="lede">Evropské, národní, bilaterální i další mezinárodní výzvy relevantní pro polovodičový hodnotový řetězec ČR — od IP a návrhu čipů přes materiály a výrobu po balení, testování a aplikace.</p>
+
+    <div class="readout" id="readout"></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="seg" id="cat-seg">
+      <button data-cat="all" class="active">Vše</button>
+      <button data-cat="eu">Evropské</button>
+      <button data-cat="cz">Národní ČR</button>
+      <button data-cat="bi">Mezinárodní</button>
+      <button data-cat="int">Zahraniční (mimo EU)</button>
+    </div>
+    <label class="chk"><input type="checkbox" id="only-open"> jen otevřené výzvy</label>
+    <div class="search"><input type="text" id="search" placeholder="Hledat podle názvu, kódu nebo tématu…"></div>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Témata:</span>
+    <div class="tagbar" id="tagbar"></div>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Žadatelé:</span>
+    <div class="tagbar" id="audiencebar"></div>
+  </div>
+  <div class="legend-note">
+    <strong>Otevřená</strong> — žádost lze podat nyní; u trvalých pobídek bez pevné uzávěrky je uvedeno „bez uzávěrky".
+    <strong>Připravovaná</strong> — výzva je ohlášena, ale ještě není otevřená.
+    Výzvy s proběhlou uzávěrkou se z přehledu odstraňují.
+  </div>
+</div>
+
+<main class="wrap">
+  <div id="sections"></div>
+  <div class="empty-state" id="empty" style="display:none;">Žádná výzva neodpovídá zvolenému filtru. Zkuste jiný segment hodnotového řetězce nebo zrušte filtr.</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Kde sledovat aktuální stav</h3>
+        <ul>
+          <li><a href="https://www.chips-ju.europa.eu/Open-and-Upcoming-Calls/" target="_blank" rel="noopener">Chips JU — Open &amp; Upcoming Calls</a> (evropské ECS / Chips for Europe výzvy)</li>
+          <li><a href="https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home" target="_blank" rel="noopener">EU Funding &amp; Tenders Portal</a> (podání všech evropských návrhů)</li>
+          <li><a href="https://tacr.gov.cz/program/program-sigma/" target="_blank" rel="noopener">TA ČR — program SIGMA</a> (bilaterální spolupráce, Industrial Chairs, komercializace)</li>
+          <li><a href="https://tacr.gov.cz/program/program-trend/" target="_blank" rel="noopener">TA ČR — program TREND</a> (aplikovaný výzkum v podnicích)</li>
+          <li><a href="https://www.dotace-optak.cz/" target="_blank" rel="noopener">OP TAK</a> (investiční a STEP výzvy MPO)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Související nástroje</h3>
+        <ul>
+          <li>EUROPRACTICE — sdílený přístup k MPW tape-outům a EDA nástrojům pro evropská pracoviště</li>
+          <li>European Chips Design Platform — cloudové EDA prostředí budované přes Design Enablement Teams (viz výzva níže)</li>
+          <li>ECS Collaboration Tool Chips JU — hledání konsorciálních partnerů napříč EU</li>
+          <li><a href="https://smarterinstruments.github.io/Katalog/" target="_blank" rel="noopener">Katalog členů CNSC</a> — pro hledání domácích partnerů do konsorcií</li>
+        </ul>
+      </div>
+    </div>
+    <p class="disclaimer">Termíny, rozpočty a stavy výzev se průběžně mění — u&nbsp;několika položek (TREND, bilaterální kola SIGMA) v srpnu 2026 probíhá aktualizace ze strany poskytovatelů. Před přípravou žádosti vždy ověřte aktuální znění na odkazovaných oficiálních stránkách. Přehled sestavil sekretariát CNSC pro vnitřní potřebu členů, nejde o oficiální stanovisko poskytovatelů dotací.</p>
+    <div class="footer-address">
+      <strong>Czech National Semiconductor Cluster, z.s.</strong><br>
+      Šumavská 416/15, 602 00 Brno, Czech Republic<br>
+      <a href="mailto:info@semicz.cz">info@semicz.cz</a> · <a href="https://www.semicz.cz" target="_blank" rel="noopener">www.semicz.cz</a>
+      <div class="partner-strip">SILICON EUROPE · SEMI.ORG · EU CHIPS ACT</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const CALLS = JSON.parse(document.getElementById("calls-data").textContent);
+
+const CAT_LABEL = {eu:"Evropské výzvy", cz:"Národní výzvy — ČR", bi:"Mezinárodní výzvy s národním financováním", int:"Zahraniční výzvy otevřené přímo českým subjektům"};
+const CAT_NOTE = {
+  eu:"Chips JU (Chips for Europe, ECS) a další evropské nástroje otevřené firmám a výzkumným organizacím z ČR.",
+  cz:"Národní programy MPO/OP TAK cílené na polovodiče, mikroelektroniku a kritické technologie.",
+  bi:"Mezinárodní konsorcia nebo bilaterální spolupráce, kde každý partner čerpá podporu od své národní agentury (u českých účastníků např. TA ČR nebo MŠMT).",
+  int:"Český subjekt žádá přímo u zahraničního poskytovatele jako kterýkoli jiný zahraniční uchazeč, bez nutnosti párového českého spolufinancování."
+};
+const CAT_WATCH = {
+  eu:"Chips JU nyní neplánuje další výzvy; z 16 výzev otevřených 7. 7. 2026 zůstávají otevřené čtyři níže, ostatní měly uzávěrku 16.–24. 9.",
+  cz:"Aktuálně neotevřeno: TA ČR TREND (13. veřejná soutěž je odložena bez termínu) a OP TAK STEP Aplikace (uzavřena předčasně 11. 8. 2026).",
+  bi:"Aktuálně neotevřeno: TA ČR SIGMA DC4 s Tchaj-wanem, Koreou a Saskem. 16. kolo skončilo 24. 6. 2026 a vyhodnocuje se, další kolo zatím nebylo ohlášeno.",
+  int:"Aktuálně neotevřeno: IC Taiwan Grand Challenge (4. kolo skončilo na jaře 2026, další zatím nebylo ohlášeno; ictaiwanchallenge.org)."
+};
+const STATUS_LABEL = {open:"Otevřená", prep:"Připravovaná", recur:"Opakovaná"};
+
+function fmtDateShort(iso){
+  const d = new Date(iso+"T00:00:00");
+  const months = ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj","lis","pro"];
+  return d.getDate()+". "+months[d.getMonth()];
+}
+function daysLeft(iso){
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const d = new Date(iso+"T00:00:00");
+  return Math.round((d-now)/86400000);
+}
+
+function renderReadout(){
+  const openCalls = CALLS.filter(c=>c.status==="open");
+  const soon = CALLS.filter(c=>c.status==="open" && c.deadline && daysLeft(c.deadline)>=0 && daysLeft(c.deadline)<=30);
+  const html = `
+    <div><div class="num">${openCalls.length}</div><div class="lbl">otevřených výzev</div></div>
+    <div><div class="num">${CALLS.filter(c=>c.cat==="eu").length}</div><div class="lbl">evropských</div></div>
+    <div><div class="num">${CALLS.filter(c=>c.cat==="cz").length}</div><div class="lbl">národních (ČR)</div></div>
+    <div><div class="num">${soon.length}</div><div class="lbl">s uzávěrkou do 30 dní</div></div>
+  `;
+  document.getElementById("readout").innerHTML = html;
+}
+
+const THEME_ORDER = ["IP a design","Materiály","Výroba","Balení a testování","Fotonika","Výkonová elektronika","AI/Compute","Konektivita","Senzory","Zdravotnictví","Vzdělávání","Dodavatelský řetězec","Startupy"];
+const AUDIENCE_ORDER = ["sme","startup","large","research"];
+const AUDIENCE_LABEL = {sme:"MSP", startup:"Startupy", large:"Velké podniky", research:"Výzkumné organizace / akademie"};
+
+function allThemeTags(){
+  const present = new Set();
+  CALLS.forEach(c=>(c.tags||[]).forEach(t=>present.add(t)));
+  return THEME_ORDER.filter(t=>present.has(t));
+}
+function allAudiences(){
+  const present = new Set();
+  CALLS.forEach(c=>(c.audience||[]).forEach(a=>present.add(a)));
+  return AUDIENCE_ORDER.filter(a=>present.has(a));
+}
+
+let state = {cat:"all", onlyOpen:false, q:"", themeTags:new Set(), audience:new Set()};
+
+function renderTagbar(){
+  const bar = document.getElementById("tagbar");
+  bar.innerHTML = allThemeTags().map(t=>`<button class="tag" data-tag="${t}">${t}</button>`).join("");
+  bar.querySelectorAll(".tag").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const t = btn.dataset.tag;
+      if(state.themeTags.has(t)){ state.themeTags.delete(t); btn.classList.remove("active"); }
+      else { state.themeTags.add(t); btn.classList.add("active"); }
+      render();
+    });
+  });
+}
+
+function renderAudienceBar(){
+  const bar = document.getElementById("audiencebar");
+  bar.innerHTML = allAudiences().map(a=>`<button class="tag" data-aud="${a}">${AUDIENCE_LABEL[a]}</button>`).join("");
+  bar.querySelectorAll(".tag").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const a = btn.dataset.aud;
+      if(state.audience.has(a)){ state.audience.delete(a); btn.classList.remove("active"); }
+      else { state.audience.add(a); btn.classList.add("active"); }
+      render();
+    });
+  });
+}
+
+function matches(c){
+  if(state.cat!=="all" && c.cat!==state.cat) return false;
+  if(state.onlyOpen && c.status!=="open") return false;
+  if(state.themeTags.size>0 && !(c.tags||[]).some(t=>state.themeTags.has(t))) return false;
+  if(state.audience.size>0 && !(c.audience||[]).some(a=>state.audience.has(a))) return false;
+  if(state.q){
+    const hay = (c.title+" "+c.code+" "+c.scope+" "+(c.tags||[]).join(" ")).toLowerCase();
+    if(!hay.includes(state.q.toLowerCase())) return false;
+  }
+  return true;
+}
+
+function callRow(c){
+  let deadlineHtml = "";
+  if(c.deadline){
+    const dl = daysLeft(c.deadline);
+    const past = dl < 0;
+    deadlineHtml = `<div class="deadline-num ${past?'past':''}">${fmtDateShort(c.deadline)}</div>
+      <div class="deadline-lbl">${past? "uzávěrka proběhla" : dl===0 ? "uzávěrka dnes" : "za "+dl+" dní"}</div>`;
+  } else {
+    deadlineHtml = c.status==="open"
+      ? `<div class="deadline-num past mono" style="font-size:15px;">bez uzávěrky</div><div class="deadline-lbl">podání kdykoli</div>`
+      : `<div class="deadline-num past mono" style="font-size:15px;">TBD</div><div class="deadline-lbl">termín upřesní poskytovatel</div>`;
+  }
+  return `
+  <details class="call" data-cat="${c.cat}">
+    <summary class="row">
+      <div class="row-main">
+        <div class="row-code">
+          <span>${c.code}</span>
+          <span class="pill ${c.status}">${STATUS_LABEL[c.status]}</span>
+        </div>
+        <div class="row-title">${c.title}</div>
+        <div class="row-sub">${c.sub}</div>
+      </div>
+      <div class="row-meta">
+        ${deadlineHtml}
+        <div class="budget-lbl">${c.budget || "Zatím neupřesněno"}</div>
+      </div>
+    </summary>
+    <div class="row-details">
+      <div class="row-details-grid">
+        <div class="detail-block"><h4>Rozsah výzvy</h4><p>${c.scope}</p></div>
+        <div class="detail-block"><h4>Očekávané výstupy</h4><p>${c.outcomes || "Zatím neupřesněno."}</p></div>
+        <div class="detail-block"><h4>Oprávnění žadatelé</h4><p>${c.applicants}</p></div>
+        <div class="detail-block"><h4>Míra podpory</h4><p>${c.rate || "Zatím neupřesněno."}</p></div>
+      </div>
+      ${c.note? `<div class="detail-block" style="margin-top:14px;"><h4>Poznámka pro členy CNSC</h4><p>${c.note}</p></div>` : ""}
+      <div class="detail-tags">${(c.tags||[]).map(t=>`<span>${t}</span>`).join("")}</div>
+      <div class="row-links"><a href="${c.link}" target="_blank" rel="noopener">Stránka výzvy →</a>${c.link2 ? `<a class="secondary" href="${c.link2}" target="_blank" rel="noopener">Podání na EU Funding &amp; Tenders Portal →</a>` : ""}</div>
+    </div>
+  </details>`;
+}
+
+function render(){
+  renderReadout();
+  const cats = ["eu","cz","bi","int"];
+  const container = document.getElementById("sections");
+  let html = "";
+  let totalShown = 0;
+  cats.forEach(cat=>{
+    const items = CALLS.filter(c=>c.cat===cat && matches(c));
+    if(state.cat!=="all" && state.cat!==cat) return;
+    if(items.length===0) return;
+    totalShown += items.length;
+    html += `<section class="section" data-cat="${cat}">
+      <div class="section-head"><h2>${CAT_LABEL[cat]}</h2><span class="count">${items.length} ${items.length===1?"výzva":items.length<5?"výzvy":"výzev"}</span></div>
+      <div class="section-note">${CAT_NOTE[cat]}</div>
+      <div class="section-watch">${CAT_WATCH[cat]}</div>
+      ${items.map(callRow).join("")}
+    </section>`;
+  });
+  container.innerHTML = html;
+  document.getElementById("empty").style.display = totalShown===0 ? "block" : "none";
+}
+
+document.getElementById("cat-seg").addEventListener("click", (e)=>{
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  state.cat = btn.dataset.cat;
+  document.querySelectorAll("#cat-seg button").forEach(b=>b.classList.toggle("active", b===btn));
+  render();
+});
+document.getElementById("only-open").addEventListener("change", (e)=>{
+  state.onlyOpen = e.target.checked;
+  render();
+});
+document.getElementById("search").addEventListener("input", (e)=>{
+  state.q = e.target.value;
+  render();
+});
+
+renderTagbar();
+renderAudienceBar();
+render();
+</script>
+</body>
+</html>
